@@ -27,7 +27,7 @@ An application that is developed in order to provide a list of items within a va
 
 ## Preview
 
-![Application Preview](/preview/bookshelf)
+![Application Preview](/preview/bookshelf.png)
 
 ## Resources
 
