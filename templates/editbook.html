@@ -1,0 +1,40 @@
+{% extends "homepage.html" %}
+{% block content %}
+<div class="mdl-grid mdl-shadow--2dp form-grid mdl-color--white margin-top">
+  <form action="{{url_for('editBook', categories=editedBook.categories, books_id=editedBook.id)}}" class="book-form" method="POST" id="formBook">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-field-text margin-top-5">
+      <input class="mdl-textfield__input" type="text" name="name" value="{{editedBook.name}}" id="name">
+      <label class="mdl-textfield__label" for="name">Book:</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-field-text">
+      <input class="mdl-textfield__input" type="text" name="author" value="{{editedBook.author}}" id="author">
+      <label class="mdl-textfield__label" for="author">Author:</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-field-text">
+      <input class="mdl-textfield__input" type="text" name="cover" value="{{editedBook.cover}}" id="cover">
+      <label class="mdl-textfield__label" for="cover">Cover URL:</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-field-text">
+      <textarea class="mdl-textfield__input" type="text" name="description" id="description">{{editedBook.description}}</textarea>
+      <label class="mdl-textfield__label" for="description">Description:</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height input-field-text">
+      <input class="mdl-textfield__input" type="text" name="categories" id="categories" value="{{editedBook.categories}}" readonly tabIndex="-1">
+      <input type="hidden" value="" name="categories">
+      <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+      <label for="categories" class="mdl-textfield__label">Category:</label>
+      <ul for="categories" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li class="mdl-menu__item" data-val="Fantasy">Fantasy</li>
+        <li class="mdl-menu__item" data-val="Fiction">Fiction</li>
+        <li class="mdl-menu__item" data-val="Horror">Horror</li>
+        <li class="mdl-menu__item" data-val="Mystery">Mystery</li>
+        <li class="mdl-menu__item" data-val="Romance">Romance</li>
+        <li class="mdl-menu__item" data-val="Other">Other</li>
+      </ul>
+    </div>
+    <br>
+    <input class="mdl-button mdl-js-button mdl-button--raised input-button mdl-color--white mdl-color-text--cyan" onclick="validateInfo()" type="button" value="Edit">
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--cyan mdl-color-text--white input-button" href="{{url_for('showBookshelf')}}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

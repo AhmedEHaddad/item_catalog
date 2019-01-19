@@ -1,0 +1,36 @@
+{% extends "homepage.html" %}
+{% block content %}
+{% if book %}
+<div class="mdl-card auto-margin mdl-textfield--full-width form-grid mdl-shadow--3dp margin-bottom-10 mdl-color--white margin-top">
+    <div class="mdl-textfield--full-width justify-start padding-0" >
+        <div class="mdl-cell--3-col mdl-cell--1-offset-desktop mdl-cell--6-col-phone mdl-cell--8-col-tablet">
+            <img src="{{book.cover}}" alt="Book Cover" class="book-cover" style="float:left;"/>
+        </div>
+        <div class=" mdl-cell--7-col mdl-cell--8-col-phone auto-margin book-header">
+                <h1 class="book-title">{{book.name}}</h1>
+    
+                <div>
+                    <span class="book-author">{{book.author}}</span>
+                </div>
+            </div>
+        <div class="mdl-cell--7-col mdl-cell--8-col-phone auto-margin">
+            <div class="book-description">
+                <div class="description-content margin-bottom-10">
+                    {{book.description}}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="action-button">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-raised mdl-color--white mdl-color-text--cyan button-edit" onclick="location.href='{{url_for('editBook', categories=book.categories, books_id = book.id)}}'">Edit</button>
+        <div class="divider"></div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-raised mdl-color--cyan mdl-color-text--white button-delete" onclick="location.href='{{url_for('deleteBook', categories = book.categories, books_id = book.id)}}'">Delete</button>
+    </div>
+
+</div>
+{% else %}
+  <span align="center" class="no-book-msg">No Book Has Been Added to This Category</span>
+{% endif %}
+{% endblock %}

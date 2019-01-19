@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="google-signin-client_id" content="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com">
+
+    <title>Bookshelf</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'css/style.css') }}" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/CreativeIT/getmdl-select/master/getmdl-select.min.css">
+
+    <!-- Scripts -->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script defer src="https://cdn.rawgit.com/CreativeIT/getmdl-select/master/getmdl-select.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!-- Pre-requisites for Google Sign in -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- End of pre-requisites -->
+
+</head>
+<!-- Always show header -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
+        <div class="mdl-layout__header-row portfolio-logo-row">
+            <span class="mdl-layout__title">
+                <div class="portfolio-logo"></div>
+                <span class="mdl-layout__title"><a href="{{url_for('showBookshelf')}}" class="mdl-color-text--black page-title">Bookshelf</a></span>
+            </span>
+        </div>
+        <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
+            <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Fantasy')}}">Fantasy</a>
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Fiction')}}">Fiction</a>
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Horror')}}">Horror</a>
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Mystery')}}">Mystery</a>
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Romance')}}">Romance</a>
+                <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Other')}}">Other</a>
+                <!-- @todo: Conditional rendering? -->
+                
+                <!--<button onclick="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Login</button>-->
+                <button onclick="signOut();" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign Out</button>
+    
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="mdl-grid portfolio-max-width page-content">
+
+            <!-- All content goes here-->
+            {% block content %}
+            {% endblock %}
+            <!-- Colored FAB button -->
+            <div class="add-button">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--cyan" id="add-button" onclick="location.href='{{url_for('addBook')}}'">
+                    <i class="material-icons">add</i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="add-button"><strong>Add Book</strong></div>
+            </div>
+        </div>
+    </main>
+</div>
+<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar mdl-color--grey">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+</div>
+<!-- MDL Snackbar -->
+{% if message %}
+<script>
+    data(function(){
+        'use strict'
+        var message = document.querySelector('.mdl-js-snackbar');
+            message.MaterialSnackbar.showSnackbar(
+                {
+                    message: "{{message}}"
+            }
+        );
+    });
+    function data(f){/in/.test(document.readyState)?setTimeout('data('+f+')',9):f()}
+</script>
+{% endif %}
+
+    <!-- GOOGLE PLUS SIGN IN-->
+    <div id="signInButton">
+        <span class="g-signin2" data-scope="openid email" data-clientid="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com"
+            data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback" data-approvalprompt="force">
+        </span>
+    </div>
+
+    <script>
+        function signInCallback(authResult) {
+            console.log('authResult: ', authResult)
+            if (authResult['code']) {
+                // $('#signInButton').attr('style', 'display: none');
+                // Send the one-time-use code to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    processData: false,
+                    data: authResult['code'],
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function (result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            console.log(result)
+                            $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                            setTimeout(function () {
+                                window.location.href = "/bookshelf";
+                            }, 3000);
+                        } else if (authResult['error']) {
+                            console.log('There was an error: ' + authResult['error']);
+                        } else {
+                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                        }
+                    }
+                })
+            }
+        }
+        
+    </script>
+
+
+
+    <!--END GOOGLE PLUS SIGN IN -->
+
+        <script>
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                console.log('User signed out.');
+                });
+            }
+        </script>
+
+
+    <script> 
+            var notification = document.querySelector('.mdl-js-snackbar');
+        
+            function validateInfo() {
+              var name = $('#name');
+              var author = $('#author');
+              var cover = $('#cover');
+              var description = $('#description');
+              var categories = $('#categories');
+            
+              if (name.val() == "") {
+                notification.MaterialSnackbar.showSnackbar(
+                  {
+                    message: "Add Book Name"
+                  }
+                );
+                name.focus();
+                return false;
+              }
+              else if (author.val() == "") {
+                notification.MaterialSnackbar.showSnackbar(
+                  {
+                    message: "Add Author Name"
+                  }
+                );
+                author.focus();
+                return false;
+              }
+              else if (cover.val() == "") {
+                notification.MaterialSnackbar.showSnackbar(
+                  {
+                    message: "Add Cover URL"
+                  }
+                );
+                cover.focus();
+                return false;
+              }
+              else if (description.val() == "") {
+                notification.MaterialSnackbar.showSnackbar(
+                  {
+                    message: "Add Book Description"
+                  }
+                );
+                description.focus();
+                return false;
+              }
+              else if (categories.val() == "") {
+                notification.MaterialSnackbar.showSnackbar(
+                  {
+                    message: "Select Category"
+                  }
+                );
+                categories.focus()
+                return false;
+              }
+
+              $('#formBook').submit();
+
+            };
+          </script>
+
+</body>
+
+</html>

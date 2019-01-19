@@ -1,0 +1,247 @@
+/* MDL Styling */
+
+.portfolio-header {
+  position: relative;
+  background-image: url(https://twontow.com/wp-content/uploads/2017/05/watercolour-blog-header-turquoise.jpg);
+}
+
+.portfolio-header .mdl-layout__header-row {
+  padding: 0;
+  justify-content: center;
+}
+
+.mdl-layout__header {
+    z-index: 0 !important;
+}
+
+.mdl-layout__title {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 100;
+}
+
+.is-compact .mdl-layout__title span {
+  display: none;
+}
+
+.portfolio-logo-row {
+  min-height: 200px;
+}
+
+.is-compact .portfolio-logo-row {
+  min-height: auto;
+}
+
+.portfolio-logo {
+  background: url('../img/bassethound.svg') 50% no-repeat;
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+  margin: auto auto 10px;
+}
+
+.is-compact .portfolio-logo {
+  height: 50px;
+  width: 50px;
+  margin-top: 7px;
+}
+
+.portfolio-navigation-row {
+  background-color: rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+  height: 45px;
+}
+
+.portfolio-navigation-row  .mdl-navigation {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.portfolio-navigation-row .mdl-navigation__link {
+    flex: 1;
+    line-height: 42px;
+}
+
+.demo-card-wide.mdl-card {
+    width: 165px;
+    display: inline-block;
+    transition: all 0.4s ease-in-out;
+    margin: 3vh 1em;
+}
+.demo-card-wide>.mdl-card__title {
+    color: #fff;
+    height: 245px;
+    padding: 0px;
+
+}
+.demo-card-wide>.mdl-card__menu {
+    color: #fff;
+}
+
+.mdl-grid {
+    display: flex;
+    max-width: 65vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdl-snackbar>.mdl-snackbar__text {
+    color: white;
+    margin-left: 6vh;
+    text-transform: uppercase;
+} 
+
+/* End of MDL Styling */
+
+div {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Buttons */
+
+.add-button {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
+
+.action-button {
+	padding: 5px 0 5px 0;
+    padding-bottom: 10px;
+}
+
+.divider {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+.button-edit, .button-delete {
+    height: 36px;
+    font: normal normal 500 normal 14px / 36px Roboto, sans-serif;
+    cursor: pointer;
+}
+
+.input-button+.input-button {
+    margin-left: 1vw;
+
+}
+
+.input-button {
+    margin: 5vh 0 5vh 0;
+}
+
+/* End of buttons */
+
+.auto-margin {
+    margin: auto;
+}
+
+.margin-top {
+    margin-top: 5vh !important;
+}
+
+.margin-top-5 {
+    margin-top: 5vh;
+}
+
+.margin-0 {
+    margin: 0;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10vh;
+}
+
+.book-cover {
+    box-shadow: rgb(141, 141, 141) 0px 0px 4px 0px;
+    height: 300px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+	display: block;
+    position: relative;
+}
+
+.book-description { 
+    box-sizing: border-box;
+    text-align: left;
+    width: 100%;
+    line-height: 24px;
+}
+
+.description-content {
+    padding: 0 0 0 100px;
+    width: inherit;
+    margin: 6vh;
+}
+
+.book-title {
+    text-align: left;
+    color: black;
+    font-size: 30px;
+    margin-top: inherit;
+    margin: 6vh;
+    
+}
+
+.book-author {
+    text-align: left;
+    max-width: 132px;
+    width: 132px;
+    color: black;
+    font-size: 17px;
+    margin: 6vh;
+}
+
+.book-header {
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+}
+
+.justify-start {
+    max-width: 100%;
+    justify-content: flex-start;
+}
+
+.form-grid {
+    max-width: 60vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+.page-title {
+    text-decoration: none !important;
+}
+
+.input-field-text {
+    width: 40vw !important;
+}
+
+.input-button+.input-button {
+    margin-left: 1vw;
+
+}
+
+.input-button {
+    margin: 5vh 0 5vh 0;
+}
+
+.login-dialog {
+    width: 30vw;
+}
+
+.book-form {
+    margin-left: 10vw;
+}
