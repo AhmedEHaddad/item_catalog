@@ -54,7 +54,7 @@ def validateAdmin():
 
 def createUser(login_session):
     newUser = User(name=login_session['name'], email=login_session['email'],
-                   url=login_session['image'])
+                   url=login_session['image'], provider=login_session['provider'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -137,7 +137,7 @@ def gconnect():
         return response
 
     # Store the access token in the session for later use
-    login_session['credentials'] = access_token
+    login_session['credentials'] = credentials.access_token
     login_session['id'] = gplus_id
 
     # Get user info
@@ -153,7 +153,7 @@ def gconnect():
     # Check if user exists - if not make new one
     if not validateUser():
         user_id = createUser(login_session)
-    login_session['user_id'] = user_id
+        login_session['user_id'] = user_id
 
     output = ''
     output += '<h1>Welcome, '

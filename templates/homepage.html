@@ -45,7 +45,7 @@
                 <!-- @todo: Conditional rendering? -->
                 
                 <!--<button onclick="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Login</button>-->
-                <button onclick="signOut();" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign Out</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color" href="{{url_for('disconnect')}}">Sign Out</button>
     
             </nav>
         </div>
@@ -88,7 +88,7 @@
 
     <!-- GOOGLE PLUS SIGN IN-->
     <div id="signInButton">
-        <span class="g-signin2" data-scope="openid email" data-clientid="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com"
+        <span class="g-signin" data-scope="openid email" data-clientid="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com"
             data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
             data-callback="signInCallback" data-approvalprompt="force">
         </span>
@@ -111,18 +111,18 @@
                         if (result) {
                             console.log(result)
                             $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
-                            setTimeout(function () {
-                                window.location.href = "/bookshelf";
-                            }, 3000);
+                            //setTimeout(function () {
+                            //    window.location.href = "/bookshelf";
+                            //}, 3000);
                         } else if (authResult['error']) {
                             console.log('There was an error: ' + authResult['error']);
                         } else {
                             $('#result').html('Failed to make a server-side call. Check your configuration and console.');
                         }
                     }
-                })
+                });
             }
-        }
+        };
         
     </script>
 
