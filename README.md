@@ -11,7 +11,7 @@ An application that is developed in order to provide a list of items within a va
 1. Install [Vagrant](https://www.vagrantup.com/)
 2. Install [VirtualBox](https://www.virtualbox.org/)
 3. Go to [Udacity's Github](https://github.com/udacity/fullstack-nanodegree-vm) and clone or download it.
-4. Add content of this [repository](add repository here)
+4. Add content of this [repository](https://github.com/LeandriB/item_catalog)
 
 ## How to run application:
 
@@ -36,5 +36,7 @@ TODO: Update resources
 * [MDL](https://getmdl.io/index.html)
 * [Vanilla JS for MDL Snackbar](https://www.sitepoint.com/faster-youtube-embeds-javascript/)
 * [Intergrating Google Sign In](https://developers.google.com/identity/sign-in/web/sign-in)
+* [Google Sign Out](https://developers.google.com/identity/sign-in/web/sign-in#sign_out_a_user)
 * [getmdl-select](http://creativeit.github.io/getmdl-select/)
-
+* [Basset Image](http://geekchicpro.com/2018/10/basset-hound-vector-art/outlines-of-hhipster-dog-basset-hound-in-a-glasses-and-bow-tie-vector-clipart/)
+* [Watecolor Header](https://twontow.com/watercolour-blog-header-turquoise/)
