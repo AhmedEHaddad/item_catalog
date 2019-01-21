@@ -42,11 +42,12 @@
                 <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Mystery')}}">Mystery</a>
                 <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Romance')}}">Romance</a>
                 <a class="mdl-navigation__link mdl-color-text--black" href="{{url_for('categorizeBooks', categories='Other')}}">Other</a>
+
+                <div id=buttons>
                 <!-- @todo: Conditional rendering? -->
-                
-                <!--<button onclick="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Login</button>-->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color" href="{{url_for('disconnect')}}">Sign Out</button>
-    
+                    <!--<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign In</button>-->
+                    <button onclick="signOut();" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign Out</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -88,7 +89,7 @@
 
     <!-- GOOGLE PLUS SIGN IN-->
     <div id="signInButton">
-        <span class="g-signin" data-scope="openid email" data-clientid="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com"
+        <span class="g-signin2" data-scope="openid email" data-clientid="949804294128-82sjnhj62735b7p0ip29rcllrfjdqu64.apps.googleusercontent.com"
             data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
             data-callback="signInCallback" data-approvalprompt="force">
         </span>
@@ -134,6 +135,7 @@
             function signOut() {
                 var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {
+                    window.location.href = "/bookshelf";
                 console.log('User signed out.');
                 });
             }
