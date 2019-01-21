@@ -31,8 +31,6 @@ An application that is developed in order to provide a list of items within a va
 
 ## Resources
 
-TODO: Update resources
-
 * [MDL](https://getmdl.io/index.html)
 * [Vanilla JS for MDL Snackbar](https://www.sitepoint.com/faster-youtube-embeds-javascript/)
 * [Intergrating Google Sign In](https://developers.google.com/identity/sign-in/web/sign-in)
