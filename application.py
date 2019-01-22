@@ -224,20 +224,20 @@ def disconnect():
 @app.route('/bookshelf/JSON')
 def bookshelfJSON():
     books = session.query(Book).all()
-    return jsonify(books=[book.serialize for book in books])
+    return jsonify(books=[r.serialize for r in books])
 
 
 @app.route('/bookshelf/categories/<string:categories>/JSON')
 def categoryJSON(categories):
     books = session.query(Book).filter_by(categories=categories).all()
-    return jsonify(books=[book.serialize for book in books])
+    return jsonify(books=[i.serialize for i in books])
 
 
 @app.route('/bookshelf/categories/<string:categories>/<int:books_id>/JSON')
 def booksJSON(categories, books_id):
-    books = session.query(Book).filter_by(categories=categories,
+    book = session.query(Book).filter_by(categories=categories,
                                           id=books_id).first()
-    return jsonify(books=book.serialize)
+    return jsonify(book=book.serialize)
 
 # APP ROUTES
 
