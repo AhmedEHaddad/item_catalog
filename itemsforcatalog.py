@@ -23,7 +23,7 @@ book1 = Book(name="The Girl with the Dragon Tattoo",
              into one satisfyingly complex and entertainingly
              atmospheric novel""", author="Stieg Larsson",
              categories="Mystery",
-             cover="https://images.gr-assets.com/books/1327868566l/2429135.jpg",
+             cover="https://bit.ly/2sC1PrD",
              user_id=1)
 
 session.add(book1)
@@ -35,7 +35,7 @@ book2 = Book(name="Harry Potter and the Sorcerer's Stone",
              with a great destiny proves his worth while
              attending Hogwarts School for Wizards and Witches.""",
              author="J.K. Rowling", categories="Fantasy",
-             cover="https://images-na.ssl-images-amazon.com/images/I/81iqZ2HHD-L.jpg",
+             cover="http://bit.ly/2R6KQYa",
              user_id=1)
 
 session.add(book2)
@@ -50,7 +50,7 @@ book3 = Book(name="The Time Traveler's Wife",
              involuntarily into the world of time
              travel.""", author="Audrey Niffenegger",
              categories="Romance",
-             cover="https://pictures.abebooks.com/VANDELLOBOOKS/18082528571.jpg",
+             cover="http://bit.ly/2AXrjEB",
              user_id=1)
 
 session.add(book3)
@@ -61,7 +61,7 @@ book4 = Book(name="Bird Box", description="""Something
              Something you must not see, because one
              glimpse will drive you violently insane""",
              author="Josh Malerman", categories="Horror",
-             cover="https://images-na.ssl-images-amazon.com/images/I/81SRiprjQSL.jpg",
+             cover="http://bit.ly/2FJZovM",
              user_id=1)
 
 session.add(book4)
@@ -74,7 +74,7 @@ book5 = Book(name="Everything, Everything",
              moves in next door, she begins a complicated romance
              that challenges everything she is ever known.""",
              author="Nicola Yoon", categories="Fiction",
-             cover="http://2.bp.blogspot.com/-nKfBook8_9g/VJMM4HkUySI/AAAAAAAAC2A/_oSkXCo0EN8/s1600/EverythingEverythingCover.jpg",
+             cover="http://bit.ly/2MnXGAM",
              user_id=1)
 
 session.add(book5)
@@ -89,7 +89,7 @@ book6 = Book(name="The Perks of Being a Wallflower",
              to whom he is writing. All we know is the world
              he shares.""", author="Stephen Chbosky",
              categories="Fiction",
-             cover="https://prodimage.images-bn.com/pimages/9781451696196_p0_v2_s550x406.jpg",
+             cover="http://bit.ly/2AZ4WhR",
              user_id=1)
 
 session.add(book6)
