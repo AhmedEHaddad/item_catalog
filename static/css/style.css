@@ -229,19 +229,6 @@ h1 {
     width: 40vw !important;
 }
 
-.input-button+.input-button {
-    margin-left: 1vw;
-
-}
-
-.input-button {
-    margin: 5vh 0 5vh 0;
-}
-
-.login-dialog {
-    width: 30vw;
-}
-
 .book-form {
     margin-left: 10vw;
 }
