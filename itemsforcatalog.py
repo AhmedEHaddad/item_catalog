@@ -11,7 +11,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Create first user
-user1 = User(name='admin', email='leandrikuyk@gmail.com')
+user1 = User(name='Leandri Kuyk', email='leandrikuyk@gmail.com')
 
 session.add(user1)
 session.commit()
