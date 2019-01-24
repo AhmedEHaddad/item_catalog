@@ -86,6 +86,7 @@ def gconnect():
     # Validate state token
     print('request', request)
     # @todo: THIS IS THE PROBLEM! Make request.args.get('state') == login_session['state']
+    # Should be request.args.get('state') != login_session['state']
     if request.args.get('state') == login_session['state']:
         print('Request args do not equal login session')
         response = make_response(json.dumps('Invalid state parameter'), 401)
@@ -132,17 +133,17 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     # Check to see if user is already logged in
-    stored_credentials = login_session.get('credentials')
+    stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
-    if stored_credentials is not None and gplus_id == stored_gplus_id:
+    if stored_access_token is not None and gplus_id == stored_gplus_id:
         response = make_response(
             json.dumps('Current user is already connected'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Store the access token in the session for later use
-    login_session['credentials'] = credentials.access_token
-    login_session['id'] = gplus_id
+    login_session['access_token'] = credentials.access_token
+    login_session['gplus_id'] = gplus_id
 
     # Get user info
     userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
@@ -153,9 +154,12 @@ def gconnect():
     login_session['name'] = data['name']
     login_session['image'] = data['picture']
     login_session['email'] = data['email']
+    # ADD PROVIDER TO LOGIN SESSION
+    login_session['provider'] = 'google'
 
     # Check if user exists - if not make new one
-    if not validateUser():
+    user_id = getUserID(data['email'])
+    if not user_id:
         user_id = createUser(login_session)
         login_session['user_id'] = user_id
 
@@ -174,7 +178,7 @@ def gconnect():
 # Revoke a current users token and reset their login session
 @app.route('/gdisconnect')
 def gdisconnect():
-    access_token = login_session['credentials']
+    access_token = login_session.get('access_token')
     # Only disconnect a connected user
     print 'In gdisconnect access token is %s', access_token
     print 'Username is: '
@@ -194,8 +198,8 @@ def gdisconnect():
 
     if result['status'] == '200':
         # Reset the user's session.
-        del login_session['credentials']
-        del login_session['id']
+        del login_session['access_token']
+        del login_session['gplus_id']
         del login_session['name']
         del login_session['email']
         del login_session['image']
