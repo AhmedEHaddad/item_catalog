@@ -40,21 +40,24 @@ session = DBSession()
 
 
 def validateUser():
-    email = login_session['email']
-    return session.query(User).filter_by(email=email).one_or_none()
+    return getUserID(email)
 
+# Check user information
+def getUserInfo(user_id):
+    user = session.query(User).filter_by(id=user_id).one()
+    return user
 
-# Check admin information
-
-
-def validateAdmin():
-    return session.query(User).filter_by(
-        email='leandrikuyk@gmail.com').one_or_none()
+def getUserID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
 
 
 def createUser(login_session):
     newUser = User(name=login_session['name'], email=login_session['email'],
-                   url=login_session['image'], provider=login_session['provider'])
+                   url=login_session['image'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
