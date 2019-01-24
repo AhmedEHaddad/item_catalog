@@ -40,7 +40,8 @@ session = DBSession()
 
 
 def validateUser():
-    return getUserID(email)
+    email = login_session['email']
+    return session.query(User).filter_by(email=email).one_or_none()
 
 # Check user information
 def getUserInfo(user_id):
@@ -57,7 +58,7 @@ def getUserID(email):
 
 def createUser(login_session):
     newUser = User(name=login_session['name'], email=login_session['email'],
-                   url=login_session['image'])
+                   url=login_session['image'], provider=login_session['provider'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -331,7 +332,6 @@ def editBook(categories, books_id):
             description = request.form['description']
             categories = request.form['categories']
             user_id = validateUser().id
-            admin_id = validateAdmin().id
             # Check user is same as book creator
             if editedBook.user_id == user_id or user_id == admin_id:
                 if name and author and cover and description and categories:
@@ -367,7 +367,6 @@ def editBook(categories, books_id):
         state = showLogin()
         if 'name' in login_session and login_session['name'] != 'null':
             user_id = validateUser().id
-            admin_id = validateAdmin().id
             if user_id == editedBook.user_id or user_id == admin_id:
                 return render_template('editbook.html',
                                        title='Edit Book',
@@ -402,7 +401,6 @@ def deleteBook(categories, books_id):
         # Check if user is logged in
         if 'name' in login_session and login_session['name'] != 'null':
             user_id = validateUser().id
-            admin_id = validateAdmin().id
             if user_id == book.user_id or user_id == admin_id:
                 session.delete(book)
                 session.commit()
