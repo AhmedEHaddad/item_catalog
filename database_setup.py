@@ -19,7 +19,6 @@ class User(Base):
     name = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
     image = Column(String(250))
-    provider = Column(String(25))
 
 
 # Class to store book information
