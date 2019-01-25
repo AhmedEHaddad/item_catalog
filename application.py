@@ -87,7 +87,8 @@ def gconnect():
     print('request', request)
     # @todo: THIS IS THE PROBLEM! Make request.args.get('state') == login_session['state']
     # Should be request.args.get('state') != login_session['state']
-    if request.args.get('state') == login_session['state']:
+    # Only works when request.args.get('state') == login_session['state'] Why?
+    if request.args.get('state') != login_session['state']:
         print('Request args do not equal login session')
         response = make_response(json.dumps('Invalid state parameter'), 401)
         response.headers['Content-Type'] = 'application/json'
