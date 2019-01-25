@@ -46,7 +46,7 @@
                 <div id=buttons>
                 <!-- @todo: Conditional rendering? -->
                     <!--<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign In</button>-->
-                    <button onclick="signOut();" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign Out</button>
+                    <button id="signOutButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--raised mdl-color--grey login-button-color">Sign Out</button>
                 </div>
             </nav>
         </div>
@@ -96,6 +96,8 @@
     </div>
 
     <script>
+        var logged = "{{ login_session['name'] }}"
+
         function signInCallback(authResult) {
             console.log('authResult: ', authResult)
             if (authResult['code']) {
@@ -110,6 +112,7 @@
                     success: function (result) {
                         // Handle or verify the server response if necessary.
                         if (result) {
+                            logged = 'name';
                             console.log(result)
                             $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
                             //setTimeout(function () {
@@ -132,13 +135,34 @@
     <!--END GOOGLE PLUS SIGN IN -->
 
         <script>
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    window.location.href = "/bookshelf";
-                console.log('User signed out.');
+            function disconnect(){
+            if(logged == 'name'){
+                $.ajax({
+                    type: 'POST',
+                    url: '/disconnect',
+                    processData: false,
+                    contentType: 'application/json',
+                    success: function(result){
+                        
+                        if(result['state'] == 'disconnected') {
+                            console.log(window.location.href + "?error=" + "successLogout");
+                        } else if (result['state'] == 'notConnected'){
+                            console.log('User is not logged in');
+                        } else if (result['state'] == 'error'){
+                            console.log('Error revoking user token');
+                        }
+                    }
                 });
+            } else {
+                console.log('User not logged in');
             }
+        };
+
+        $('#signOutButton').click(function() {
+            disconnect();
+        });
+        
+
         </script>
 
 
