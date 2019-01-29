@@ -38,3 +38,4 @@ An application that is developed in order to provide a list of items within a va
 * [getmdl-select](http://creativeit.github.io/getmdl-select/)
 * [Basset Image](http://geekchicpro.com/2018/10/basset-hound-vector-art/outlines-of-hhipster-dog-basset-hound-in-a-glasses-and-bow-tie-vector-clipart/)
 * [Watecolor Header](https://twontow.com/watercolour-blog-header-turquoise/)
+* [Basic Auth logout function](https://tuhrig.de/basic-auth-log-out-with-javascript/)
